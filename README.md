@@ -1,4 +1,4 @@
-# Lipi plugins
+# Lipi Expense Tracker
 
 Use [Lipi](https://lipi.com.np), the personal finance app, from your AI
 assistant: ask about your spending, budgets, accounts and loans, and keep your
@@ -27,7 +27,7 @@ You need a Lipi account at [app.lipi.com.np](https://app.lipi.com.np).
 The plugin bundles the server and the skills:
 
 ```
-/plugin marketplace add LipiTechnology/lipi-plugins
+/plugin marketplace add LipiTechnology/lipi-expense-tracker
 /plugin install lipi-expense-tracker@lipi
 ```
 
@@ -35,7 +35,7 @@ Then run `/mcp`, pick **lipi** and sign in. Skills are called as
 `/lipi-expense-tracker:lipi-monthly-review` and so on, or Claude picks them up
 when they fit.
 
-To try a local checkout without installing: `claude --plugin-dir /path/to/lipi-plugins`.
+To try a local checkout without installing: `claude --plugin-dir /path/to/lipi-expense-tracker`.
 
 ## Claude (claude.ai, desktop, mobile) and ChatGPT
 
@@ -68,7 +68,7 @@ registration, so there is no client ID to set up.
 where to put them:
 
 ```sh
-npx skills add LipiTechnology/lipi-plugins
+npx skills add LipiTechnology/lipi-expense-tracker
 ```
 
 Or copy each folder under `skills/` into your agent's skills folder:

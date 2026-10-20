@@ -12,7 +12,7 @@ books, and three things they could do about it.
 
 This skill needs the Lipi MCP server (`https://api.lipi.com.np/mcp`). If tools
 such as `get_overview` are not available, say so and point the user to the
-setup steps at https://github.com/LipiTechnology/lipi-plugins#readme. Do not
+setup steps at https://github.com/LipiTechnology/lipi-expense-tracker#readme. Do not
 guess figures.
 
 The month is the one the user names, or the current month. Work in Gregorian

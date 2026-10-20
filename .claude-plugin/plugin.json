@@ -9,7 +9,7 @@
     "url": "https://lipi.com.np"
   },
   "homepage": "https://lipi.com.np",
-  "repository": "https://github.com/LipiTechnology/lipi-plugins",
+  "repository": "https://github.com/LipiTechnology/lipi-expense-tracker",
   "keywords": [
     "finance",
     "expense-tracker",
@@ -20,7 +20,7 @@
     "mcp"
   ],
   "icon": "./assets/logo.png",
-  "documentationUrl": "https://github.com/LipiTechnology/lipi-plugins#readme",
+  "documentationUrl": "https://github.com/LipiTechnology/lipi-expense-tracker#readme",
   "supportUrl": "https://lipi.com.np/#faq",
   "privacyPolicyUrl": "https://lipi.com.np/privacy-policy",
   "termsOfServiceUrl": "https://lipi.com.np/terms-of-service"

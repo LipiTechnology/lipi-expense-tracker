@@ -14,7 +14,7 @@ This skill needs the Lipi MCP server (`https://api.lipi.com.np/mcp`) connected
 with **Full access**. If tools such as `create_transaction` are missing, the
 connection is read-only or not set up: say so and point the user to Lipi
 Settings → AI assistants, or to
-https://github.com/LipiTechnology/lipi-plugins#readme. Never pretend a record
+https://github.com/LipiTechnology/lipi-expense-tracker#readme. Never pretend a record
 was saved.
 
 ## Steps
