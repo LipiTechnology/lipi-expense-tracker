@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "lipi-expense-tracker",
-      "source": "./claude",
+      "source": "./",
       "description": "Ask about your Lipi money books and keep them up to date: spending, budgets, accounts, loans and EMIs, across currencies.",
       "category": "finance"
     }

@@ -1,8 +1,8 @@
 {
   "name": "lipi-expense-tracker",
   "displayName": "Lipi Expense Tracker",
-  "version": "1.0.0",
-  "description": "Ask about your Lipi money books and keep them up to date: spending, budgets, accounts, loans and EMIs, across currencies. Connects to Lipi's MCP server; you sign in to Lipi and choose Read only or Full access.",
+  "version": "1.1.0",
+  "description": "Ask about your Lipi money books and keep them up to date: spending, budgets, accounts, loans and EMIs, across currencies. Bundles Lipi's MCP server (sign in to Lipi, Read only or Full access) and skills for a monthly review, logging expenses and loan schedules.",
   "author": {
     "name": "Lipi Technology",
     "email": "support@lipi.com.np",
@@ -10,7 +10,15 @@
   },
   "homepage": "https://lipi.com.np",
   "repository": "https://github.com/LipiTechnology/lipi-plugins",
-  "keywords": ["finance", "expense-tracker", "budget", "expenses", "loans", "emi", "mcp"],
+  "keywords": [
+    "finance",
+    "expense-tracker",
+    "budget",
+    "expenses",
+    "loans",
+    "emi",
+    "mcp"
+  ],
   "icon": "./assets/logo.png",
   "documentationUrl": "https://github.com/LipiTechnology/lipi-plugins#readme",
   "supportUrl": "https://lipi.com.np/#faq",

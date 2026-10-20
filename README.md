@@ -1,76 +1,128 @@
 # Lipi plugins
 
-Listing packages for AI app directories. Each one points at the same remote
-MCP server, `https://api.lipi.com.np/mcp` (OAuth 2.1 with dynamic client
-registration). The server itself lives in `LipiTechnology/api.lipi.com.np`.
-This repo only holds what each directory asks for: listing copy, review test
-cases, icons.
+Use [Lipi](https://lipi.com.np), the personal finance app, from your AI
+assistant: ask about your spending, budgets, accounts and loans, and keep your
+books up to date without opening the app.
 
-Nothing here is secret. Reviewer credentials go into each portal's own form,
-never into this repo.
+Two parts, and they work in any assistant that supports them:
 
-| Folder | Platform | Status |
-|---|---|---|
-| `chatgpt/` | OpenAI plugins (Agent Plugins format: `plugin.json`, `mcp.json`, `assets/`) | Submitted for review 2026-10-21, version 1.0.1 |
-| `claude/` | Claude Code plugin `lipi-expense-tracker` (`.claude-plugin/plugin.json`, `.mcp.json`), listed by the marketplace in `.claude-plugin/marketplace.json` at the repo root | Version 1.0.0, installable from this repo |
+- **The Lipi MCP server**, `https://api.lipi.com.np/mcp`. This is what reads
+  and writes your books. You sign in to Lipi (OAuth) and choose **Read only**
+  (the default) or **Full access**. You can see every action and disconnect at
+  any time in Lipi under Settings → AI assistants.
+- **Skills** in `skills/`, plain `SKILL.md` files in the Agent Skills format.
+  They teach the assistant Lipi's workflows. They are optional, and do nothing
+  without the server.
 
-## Use Lipi in Claude Code
+| Skill | Use it to |
+|---|---|
+| `lipi-monthly-review` | Review a month: totals by bucket, biggest categories, budgets, unusual spending, bills and EMIs due, three suggestions |
+| `lipi-log-expenses` | Add expenses, income and transfers from what you say, a receipt or a statement, with a duplicate check first (Full access) |
+| `lipi-loan-schedule` | Put a bank loan's real EMI schedule in from a photo or PDF, record prepayments, mark EMIs paid (Full access, Premium) |
+
+You need a Lipi account at [app.lipi.com.np](https://app.lipi.com.np).
+
+## Claude Code
+
+The plugin bundles the server and the skills:
 
 ```
 /plugin marketplace add LipiTechnology/lipi-plugins
 /plugin install lipi-expense-tracker@lipi
 ```
 
-Or in one step (Claude Code 2.1.275 or later):
+Then run `/mcp`, pick **lipi** and sign in. Skills are called as
+`/lipi-expense-tracker:lipi-monthly-review` and so on, or Claude picks them up
+when they fit.
 
-```
-/plugin install lipi-expense-tracker --marketplace LipiTechnology/lipi-plugins
-```
+To try a local checkout without installing: `claude --plugin-dir /path/to/lipi-plugins`.
 
-Then run `/mcp`, pick **lipi**, and sign in to Lipi. Choose Read only or
-Full access on Lipi's consent screen.
+## Claude (claude.ai, desktop, mobile) and ChatGPT
 
-## Use Lipi in other apps
+These take the server only:
 
-Any app that takes a remote MCP server with OAuth needs only the URL
-`https://api.lipi.com.np/mcp`. In claude.ai: Customize → Connectors → **Add
-custom connector**. In ChatGPT: Settings → Apps → developer mode → **Create
-app**.
+- **Claude:** Customize → Connectors → **Add custom connector**, URL
+  `https://api.lipi.com.np/mcp`, then **Connect**.
+- **ChatGPT:** Settings → Apps → turn on developer mode → **Create app**, URL
+  `https://api.lipi.com.np/mcp`, authentication OAuth.
 
-The Claude directory lists the server itself as a connector, submitted at
-`claude.ai/directory/manage` (paid plan needed). Submitting the
-`claude/` plugin there as well needs this repo to be public and a licence.
+## Other agents
 
-Check the plugin before a release:
+**1. Add the server.** Every agent below then opens a browser to sign in to
+Lipi the first time it connects.
+
+| Agent | Where | Add |
+|---|---|---|
+| Codex | `~/.codex/config.toml` | `[mcp_servers.lipi]` with `url = "https://api.lipi.com.np/mcp"`, then run `codex mcp login lipi` |
+| Cursor | `.cursor/mcp.json` or `~/.cursor/mcp.json` | `{ "mcpServers": { "lipi": { "url": "https://api.lipi.com.np/mcp" } } }` |
+| VS Code (GitHub Copilot) | `.vscode/mcp.json` | `{ "servers": { "lipi": { "type": "http", "url": "https://api.lipi.com.np/mcp" } } }` |
+| Gemini CLI | `~/.gemini/settings.json` | `{ "mcpServers": { "lipi": { "httpUrl": "https://api.lipi.com.np/mcp" } } }` |
+| OpenCode | `opencode.json` | `{ "mcp": { "lipi": { "type": "remote", "url": "https://api.lipi.com.np/mcp" } } }` |
+| Windsurf | `~/.codeium/windsurf/mcp_config.json` | `{ "mcpServers": { "lipi": { "serverUrl": "https://api.lipi.com.np/mcp" } } }` |
+
+Any other MCP client: add a remote (Streamable HTTP) server at
+`https://api.lipi.com.np/mcp` with OAuth. It supports dynamic client
+registration, so there is no client ID to set up.
+
+**2. Add the skills (optional).** One command detects your agents and asks
+where to put them:
 
 ```sh
-claude plugin validate ./claude                       # Claude Code
-claude plugin validate ./claude --profile directory   # Anthropic's directory rules
-claude plugin validate .                              # the marketplace
+npx skills add LipiTechnology/lipi-plugins
 ```
 
-## Build a ZIP
+Or copy each folder under `skills/` into your agent's skills folder:
+
+| Agent | Project folder | Personal folder |
+|---|---|---|
+| Codex | `.agents/skills/` | `~/.codex/skills/` |
+| OpenCode | `.agents/skills/` | `~/.config/opencode/skills/` |
+| Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| GitHub Copilot | `.agents/skills/` | `~/.copilot/skills/` |
+| Windsurf | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| Claude Code, without the plugin | `.claude/skills/` | `~/.claude/skills/` |
+
+Outside Claude Code the skills have no `lipi-expense-tracker:` prefix; call
+them by name, such as `lipi-monthly-review`.
+
+## Privacy
+
+Nothing in this repo is secret and nothing here collects data. What the
+assistant reads from Lipi goes to that assistant's provider, under your
+agreement with them. Lipi keeps a 30-day log of each action an assistant takes.
+See the [privacy policy](https://lipi.com.np/privacy-policy).
+
+## For maintainers
+
+| Path | What |
+|---|---|
+| `.claude-plugin/plugin.json`, `.mcp.json`, `skills/`, `assets/` | Claude Code plugin `lipi-expense-tracker`; the repo root is the plugin |
+| `.claude-plugin/marketplace.json` | Marketplace `lipi`, listing the root as the plugin |
+| `chatgpt/` | OpenAI plugin package (Agent Plugins format). Submitted for review 2026-10-21, version 1.0.1 |
+| `scripts/zip.sh` | Builds an upload ZIP for a platform folder |
+
+Reviewer credentials go into each portal's own form, never into this repo.
+
+Before a release:
 
 ```sh
-scripts/zip.sh chatgpt   # → dist/lipi-chatgpt-plugin.zip
+claude plugin validate .                         # plugin and marketplace
+claude plugin validate . --profile directory     # Anthropic's directory rules
+scripts/zip.sh chatgpt                           # → dist/lipi-chatgpt-plugin.zip
 ```
 
-Upload it at `platform.openai.com/plugins`: **Upload plugin to make changes**
-on the existing Lipi plugin. Raise `version` in `plugin.json` with every
-upload.
+Upload the ChatGPT ZIP at `platform.openai.com/plugins` with **Upload plugin to
+make changes**, and raise `version` in `chatgpt/plugin.json` each time. Raise
+`version` in `.claude-plugin/plugin.json` for each Claude Code release.
 
-## Known portal limits (ChatGPT)
+Known OpenAI portal limits, found by trial (it reports one error per upload):
 
-Found by trial; the portal reports one error per upload.
-
-- `interface.shortDescription` (shown as the subtitle) and each translated
-  `subtitle`: at most 30 characters.
+- `interface.shortDescription` (the subtitle) and each translated `subtitle`:
+  at most 30 characters.
 - `review.test_cases.positive[].tools_triggered`: a string, not a list.
-- The description must not mention pricing, plans or promotions.
+- No pricing, plans or promotions in the description.
 - No tool may switch between operations through an argument (a `method` or
-  `kind` enum): the tool scan wants one tool per operation.
+  `kind` enum): the scan wants one tool per operation.
 
-## Copy rules
-
-Lipi is listed as a general personal-finance app, not a Nepal-only one: no
-NPR, Nepal or NEPSE in listing copy or test prompts.
+Listing copy treats Lipi as a general personal finance app: no country, local
+currency or local market in listing copy or test prompts.
