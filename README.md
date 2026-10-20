@@ -24,10 +24,16 @@ You need a Lipi account at [app.lipi.com.np](https://app.lipi.com.np).
 
 ## Claude Code
 
-The plugin bundles the server and the skills:
+The plugin bundles the server and the skills. Two commands inside Claude Code,
+one at a time. First add this repo as a marketplace:
 
 ```
 /plugin marketplace add LipiTechnology/lipi-expense-tracker
+```
+
+Then install the plugin:
+
+```
 /plugin install lipi-expense-tracker@lipi
 ```
 
