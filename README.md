@@ -4,21 +4,36 @@ Use [Lipi](https://lipi.com.np), the personal finance app, from your AI
 assistant: ask about your spending, budgets, accounts and loans, and keep your
 books up to date without opening the app.
 
-Two parts, and they work in any assistant that supports them:
+The core is the Lipi MCP server, `https://api.lipi.com.np/mcp`. It reads and
+writes your books, and everything else here depends on it. You sign in to Lipi
+(OAuth) and choose Read only (the default) or Full access. You can see every
+action and disconnect at any time in Lipi under Settings → AI assistants.
+Connect it first; the sections below show how for each assistant.
 
-- **The Lipi MCP server**, `https://api.lipi.com.np/mcp`. This is what reads
-  and writes your books. You sign in to Lipi (OAuth) and choose **Read only**
-  (the default) or **Full access**. You can see every action and disconnect at
-  any time in Lipi under Settings → AI assistants.
-- **Skills** in `skills/`, plain `SKILL.md` files in the Agent Skills format.
-  They teach the assistant Lipi's workflows. They are optional, and do nothing
-  without the server.
+On top of the server, `skills/` holds optional skills: plain `SKILL.md` files
+in the Agent Skills format. Each one makes the assistant do work Lipi doesn't
+do on its own, such as forecasts, what-ifs, audits and drafted messages, using
+your real records. They do nothing without the server.
 
-| Skill | Use it to |
+| Skill | What it does |
 |---|---|
-| `lipi-monthly-review` | Review a month: totals by bucket, biggest categories, budgets, unusual spending, bills and EMIs due, three suggestions |
-| `lipi-log-expenses` | Add expenses, income and transfers from what you say, a receipt or a statement, with a duplicate check first (Full access) |
-| `lipi-loan-schedule` | Put a bank loan's real EMI schedule in from a photo or PDF, record prepayments, mark EMIs paid (Full access, Premium) |
+| `lipi-monthly-review` | Reviews a month: totals by bucket, biggest categories, budgets, unusual spending, bills and EMIs due, three suggestions |
+| `lipi-cash-flow-forecast` | Projects each account's balance for the next 30 to 90 days and warns about the first day it runs short |
+| `lipi-spending-explainer` | Explains why spending changed: more purchases, bigger ones, one-offs or a currency rate |
+| `lipi-net-worth-explainer` | Splits a net worth change into money saved, debt paid, asset prices and exchange rates |
+| `lipi-subscription-audit` | Finds every repeating charge, prices it per year, flags price rises and duplicates |
+| `lipi-budget-builder` | Builds budgets from what you really spend and your savings target, then creates them |
+| `lipi-savings-goal-plan` | Turns a goal and a date into a monthly amount and the spending to trim |
+| `lipi-loan-prepayment-planner` | Works out the interest and months a prepayment saves, and which loan to clear first (Premium) |
+| `lipi-books-cleanup` | Finds uncategorized records, duplicates, hidden transfers and wrong buckets, and fixes them in one reviewed batch |
+| `lipi-settle-up` | Works out who owes whom across splits and ledgers, the fewest payments, and drafts reminders |
+| `lipi-invoice-follow-up` | Sorts unpaid invoices by lateness and drafts a follow-up email per client (Premium) |
+| `lipi-year-end-pack` | Gathers the year's income, tax paid, insurance, loan interest and invoices for an accountant |
+| `lipi-log-expenses` | Adds expenses, income and transfers from what you say, a receipt or a statement (Full access) |
+| `lipi-loan-schedule` | Puts a bank loan's real EMI schedule in from a photo or PDF (Full access, Premium) |
+
+Skills that write ask before changing anything. None of them gives investment
+or tax advice.
 
 You need a Lipi account at [app.lipi.com.np](https://app.lipi.com.np).
 

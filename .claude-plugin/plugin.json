@@ -1,8 +1,8 @@
 {
   "name": "lipi-expense-tracker",
   "displayName": "Lipi Expense Tracker",
-  "version": "1.1.0",
-  "description": "Ask about your Lipi money books and keep them up to date: spending, budgets, accounts, loans and EMIs, across currencies. Bundles Lipi's MCP server (sign in to Lipi, Read only or Full access) and skills for a monthly review, logging expenses and loan schedules.",
+  "version": "1.2.0",
+  "description": "Lipi's MCP server for your money books (spending, budgets, accounts, loans and EMIs, across currencies): sign in to Lipi, Read only or Full access. Plus optional skills that build on it: cash flow forecast, spending and net worth explainers, subscription audit, budget builder, savings plans, loan prepayment what-ifs, books cleanup, settle-up, invoice follow-up and a year-end pack.",
   "author": {
     "name": "Lipi Technology",
     "email": "support@lipi.com.np",

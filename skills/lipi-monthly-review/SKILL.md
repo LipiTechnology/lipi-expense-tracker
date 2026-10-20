@@ -1,6 +1,6 @@
 ---
 name: lipi-monthly-review
-description: Review a month of the user's finances in Lipi - totals by bucket, biggest categories, budgets over or close, unusual spending, upcoming bills and EMIs - and end with three concrete suggestions. Use when the user asks how their month went, for a money review or summary, "where did my money go", or how they are doing against their budgets. Needs the Lipi MCP server connected.
+description: Review a month of the user's finances in Lipi: totals by bucket, biggest categories, budgets over or close, unusual spending, upcoming bills and EMIs. Ends with three concrete suggestions. Use when the user asks how their month went, for a money review or summary, "where did my money go", or how they are doing against their budgets. Needs the Lipi MCP server connected.
 ---
 
 # Lipi monthly review

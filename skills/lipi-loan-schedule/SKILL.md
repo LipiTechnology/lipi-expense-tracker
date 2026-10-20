@@ -12,7 +12,7 @@ is to copy the bank's figures faithfully.
 ## Before you start
 
 This skill needs the Lipi MCP server (`https://api.lipi.com.np/mcp`) connected
-with **Full access**. If `save_bank_loan` is missing, the connection is
+with Full access. If `save_bank_loan` is missing, the connection is
 read-only or not set up: say so and point the user to Lipi Settings → AI
 assistants. If a tool answers that loans need Premium, tell the user and stop.
 
