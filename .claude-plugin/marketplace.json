@@ -1,0 +1,17 @@
+{
+  "name": "lipi",
+  "description": "Lipi personal finance for Claude Code: your accounts, spending, budgets and loans, through Lipi's MCP server.",
+  "owner": {
+    "name": "Lipi Technology",
+    "email": "support@lipi.com.np",
+    "url": "https://lipi.com.np"
+  },
+  "plugins": [
+    {
+      "name": "lipi-expense-tracker",
+      "source": "./claude",
+      "description": "Ask about your Lipi money books and keep them up to date: spending, budgets, accounts, loans and EMIs, across currencies.",
+      "category": "finance"
+    }
+  ]
+}

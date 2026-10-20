@@ -12,10 +12,42 @@ never into this repo.
 | Folder | Platform | Status |
 |---|---|---|
 | `chatgpt/` | OpenAI plugins (Agent Plugins format: `plugin.json`, `mcp.json`, `assets/`) | Submitted for review 2026-10-21, version 1.0.1 |
+| `claude/` | Claude Code plugin `lipi-expense-tracker` (`.claude-plugin/plugin.json`, `.mcp.json`), listed by the marketplace in `.claude-plugin/marketplace.json` at the repo root | Version 1.0.0, installable from this repo |
 
-The Claude directory takes a remote MCP server as a connector through
-`claude.ai/directory/manage`, with no package: nothing to keep here unless we
-later publish a Claude plugin bundle, which must come from a public GitHub repo.
+## Use Lipi in Claude Code
+
+```
+/plugin marketplace add LipiTechnology/lipi-plugins
+/plugin install lipi-expense-tracker@lipi
+```
+
+Or in one step (Claude Code 2.1.275 or later):
+
+```
+/plugin install lipi-expense-tracker --marketplace LipiTechnology/lipi-plugins
+```
+
+Then run `/mcp`, pick **lipi**, and sign in to Lipi. Choose Read only or
+Full access on Lipi's consent screen.
+
+## Use Lipi in other apps
+
+Any app that takes a remote MCP server with OAuth needs only the URL
+`https://api.lipi.com.np/mcp`. In claude.ai: Customize → Connectors → **Add
+custom connector**. In ChatGPT: Settings → Apps → developer mode → **Create
+app**.
+
+The Claude directory lists the server itself as a connector, submitted at
+`claude.ai/directory/manage` (paid plan needed). Submitting the
+`claude/` plugin there as well needs this repo to be public and a licence.
+
+Check the plugin before a release:
+
+```sh
+claude plugin validate ./claude                       # Claude Code
+claude plugin validate ./claude --profile directory   # Anthropic's directory rules
+claude plugin validate .                              # the marketplace
+```
 
 ## Build a ZIP
 

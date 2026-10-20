@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lipi": {
+      "type": "http",
+      "url": "https://api.lipi.com.np/mcp"
+    }
+  }
+}
