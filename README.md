@@ -113,6 +113,10 @@ assistant reads from Lipi goes to that assistant's provider, under your
 agreement with them. Lipi keeps a 30-day log of each action an assistant takes.
 See the [privacy policy](https://lipi.com.np/privacy-policy).
 
+## License
+
+MIT, see [LICENSE](LICENSE). The Lipi and SVCZZ names and logos are trademarks of Lipi Technology and are not covered by the license.
+
 ## For maintainers
 
 | Path | What |

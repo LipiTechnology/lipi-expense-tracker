@@ -10,6 +10,7 @@
   },
   "homepage": "https://lipi.com.np",
   "repository": "https://github.com/LipiTechnology/lipi-expense-tracker",
+  "license": "MIT",
   "keywords": [
     "finance",
     "expense-tracker",
